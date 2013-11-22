@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Cinzel+Decorative' rel='stylesheet' type='text/css'>
+<title>Crack the Case</title>
+<style>
+body {
+	background-color:#000;
+	height:100%;
+	color:white;
+	font-family: 'Cinzel Decorative', cursive;
+	font-size:12px;
+}
+
+#container {
+	width:800px;
+	height:100%;
+	margin:auto;
+	text-align:center;
+	margin-top:100px;
+}
+</style>
+
+<script>
+$(document).ready(function() {
+	
+	var alph = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+	var ans = [7,4,13,17,24];
+	var func = function(){
+		var txt = $("#user_in").val();
+		txt = txt.toLowerCase();
+		
+		var out_str = "";
+		for (var i = 0; i<txt.length; i++){
+			if(i<ans.length){
+				out_str += (Math.abs((ans[i]-($.inArray(txt.charAt(i),alph))))+1) + " ";
+			} else {
+				out_str += (0 +($.inArray(txt.charAt(i),alph)) + 1)  + " ";
+			}
+		}
+		
+		if(out_str == "1 1 1 1 1 "){
+			$("#container").html('<iframe width="640" height="480" src="//www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1;controls=0;showinfo=0" frameborder="0" allowfullscreen></iframe>');
+		}
+		else if(txt == ""){
+			$("#output").text("They told me this would happen, but I still wanted to try...");	
+		} else {
+			$("#output").text(out_str);
+		}
+	};
+	
+	$("#submit").click(func);
+	$("#user_in").keyup(function(e){
+		if(e.keyCode == '13'){
+			func();
+		}
+	});
+	
+});
+</script>
+</head>
+
+<body>
+<div id="container">
+	<img src="pic.png"/>
+    <p>
+    Mr. Smith left a dying message...... Can you solve it?
+    </p>
+    <p>
+    <input type='text' id='user_in' /><input type='button' id='submit' value="I've solved it!"/>
+    <div id='output'></div>
+    </p>
+</div>
+</body>
+</html>

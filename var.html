@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<title>jQuery Example</title>
+<script>
+$(document).ready(function() {
+	
+	/*PART 1 VARIABLES======================================================*/
+	//THESE ARE ALL GLOBAL
+	var a = 2; //a number like int
+	var b = true; //boolean
+	var c = "Hi Amigo!"; //string
+	var d = [a, b, c]; //an array
+	var e = $("#element"); //an element from the document
+	
+	var f = function(){
+		var g = "random"; //this is a local variable
+		
+		//do a whole bunch of random stuff
+		if(b){
+			a = a+a;
+			b = false;
+			c = "Bye Amigo!";
+		} else {
+			a = 2;
+			b = true;
+			c = "Hi Amigo!";	
+		}
+		
+		d = [a, b, c];
+		console.log(a, b, c, d, e, f, g); //I can access the local variable and globla variables here
+		
+	}; //a function
+	
+	console.log(a, b, c, d, e, f); //I can't access the local variable g in function f here, if i put g here, it will give me error
+	f();
+	
+	/*PART 2 DOM ELEMENTS======================================================*/
+	console.log($("#element").val(), e.val(), e.attr("value")); //same thing
+	
+	var attr_type = e.attr("type"); //type attribute from input
+	var attr_id = e.attr("id"); //id attribute from input
+	
+	console.log(attr_type, attr_id);
+	
+	$("#my_id").css("color", "red"); //change the dom element with id my_id red, will only affect one
+	$(".my_class").css("color", "red"); //change the dom element with class my_class red, will affect ALL
+	
+	//change the dom element when clicked
+	$(".my_class").click(function(ev){
+		$(this).css("color", "blue");
+	});
+	
+	//change the dom element when hovered, $(this) represents the element with class "my_class"
+	$(".my_class").hover(function(ev){
+		$(this).css("color", "yellow"); //hover in function
+	},
+	function(e){
+		$(this).css("color", "red"); //hover out function
+	});
+	
+	e.keyup(function(ev){
+		//LOTS OF IF ELSE statements
+		if(e.val() == "reset"){
+			f(); // call function f!!!
+		} else if(e.val() == "array 0"){
+			$("#notice").text(d[0]); // get first item in array d
+		} else if(e.val() == "array 1"){
+			$("#notice").text(d[1]); // get second item in array d
+		} else if(e.val() == "array 2"){
+			$("#notice").text(d[2]); // get third item in array d
+		} else {
+			$("#notice").html("keyCode " +ev.keyCode + " <b>This is being keyed up!</b>"); // key up, html() will take in html attributes
+		}
+		
+		$("#notice").width(400); // get width and height back to normal
+		$("#notice").height(18);
+	});
+	
+	e.keydown(function(ev){
+		$("#notice").text("<b>This is being keyed down!</b>"); // key down, text() will turn html attribute into actual text
+		
+		console.log($("#notice").width(), $("#notice").height()); //log width and height before change
+		$("#notice").width(300);
+		$("#notice").height(500);
+		console.log($("#notice").width(), $("#notice").height()); //log width and height after change
+	});
+	
+	
+});
+</script>
+</head>
+
+<body>
+<input type='text' id='element' value='text' />
+<div id='notice'></div>
+<div id='my_id'>one</div>
+<div id='my_id'>two</div>
+<div id='my_id'>three</div>
+
+<div class='my_class'>one</div>
+<div class='my_class'>two</div>
+<div class='my_class'>three</div>
+</body>
+</html>

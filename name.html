@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<title>jQuery Example</title>
+<script>
+$(document).ready(function() {
+	$("#submit").click(function(){
+		if($("#user_in").val() == ""){
+			$("#output").text("I'm not sure I know who you are.");	
+		}
+		else if ($("#user_in").val() == "secret name"){
+			$("#output").text("Never gonna give you up!");	
+		} else {
+			$("#output").text("Hi, "+$("#user_in").val());
+		}
+	});
+});
+</script>
+</head>
+
+<body>
+What is your name?
+<input type='text' id='user_in' /><input type='button' id='submit' value='ENTER NAME'/>
+<div id='output'></div>
+</body>
+</html>
